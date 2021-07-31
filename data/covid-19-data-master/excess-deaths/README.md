@@ -74,7 +74,7 @@ The number of years used in the expected deaths calculation changes depending on
 
 **Austria**
 
-Source: [Statistics Austria](http://www.statistik.at/web_de/statistiken/menschen_und_gesellschaft/bevoelkerung/gestorbene/index.html)  
+Source: [Statistics Austria](https://www.statistik.at/web_de/statistiken/menschen_und_gesellschaft/bevoelkerung/gestorbene/index.html)  
 Baseline years: 2015-2019  
 Data frequency: weekly  
 
@@ -218,7 +218,7 @@ Data frequency: weekly
 
 **South Korea**
 
-Source: [Statistics Korea](http://kosis.kr/statisticsList/statisticsListIndex.do?menuId=M_01_01&vwcd=MT_ZTITLE&parmTabId=M_01_01#SelectStatsBoxDiv)  
+Source: [Statistics Korea](https://kosis.kr/statisticsList/statisticsListIndex.do?menuId=M_01_01&vwcd=MT_ZTITLE&parmTabId=M_01_01#SelectStatsBoxDiv)  
 Baseline years: 2015-2019  
 Data frequency: monthly    
 
