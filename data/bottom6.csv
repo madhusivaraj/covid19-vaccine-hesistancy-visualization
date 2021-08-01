@@ -922,7 +922,7 @@ date,geoid,state,cases,cases_avg,cases_avg_per_100k,deaths,deaths_avg,deaths_avg
 6/13/21,USA-05,Arkansas,91,218.71,7.25,1,2.14,0.07
 6/14/21,USA-05,Arkansas,103,224.57,7.44,2,2,0.07
 6/15/21,USA-05,Arkansas,302,234.71,7.78,6,2.43,0.08
-6/16/21,USA-05,Arkansas,288,247.14,8.19,-2,2.5,0.08
+6/16/21,USA-05,Arkansas,288,247.14,8.19,2,2.5,0.08
 3/13/20,USA-16,Idaho,1,0.14,0.01,0,0,0
 3/14/20,USA-16,Idaho,4,0.71,0.04,0,0,0
 3/15/20,USA-16,Idaho,0,0.71,0.04,0,0,0

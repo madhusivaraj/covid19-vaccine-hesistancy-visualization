@@ -51,10 +51,7 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv",
       .domain([0, d3.max(data, function(d) { return +d.cases_avg_per_100k; })])
       .range([ height, 0 ]);
     svg.append("g")
-      .call(d3.axisLeft(y));
-      
-      
-      
+      .call(d3.axisLeft(y));        
   svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
@@ -75,14 +72,48 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv",
         .attr("stroke", function(d){ return myColor("valueA") })
         .style("stroke-width", 3)
         .style("fill", "none")
-    
+
+    function renderThirdChartAnnotations(d, margin) {
+        d3.select(".annotation-group").remove();
+        const annotations = [
+            {
+                note: {
+                    label: "The average number of cases per 100K on 6/16 was " + d.cases_avg_per_100k + ", with total cases at " + d.cases +". "
+                    + '**Not depicted on graph: The average number of deaths per 100K on this day was ' + d.deaths_avg_per_100k + ", with total cases at " + d.deaths +".",
+                    bgPadding: {"top": 15, "left": 10, "right": 10, "bottom": 10},
+                    title: d.state + " - " + d.date,
+                    orientation: "topBottom",
+                    align: "top",
+                    wrap: 300
+                },
+                color: "#696969",
+                type: d3.annotationCalloutCircle,
+                subject: {radius: 20},
+                x: 1300,
+                y: 460,
+                dy: -227,
+                dx: -4
+            },
+        ];
+        const makeAnnotations = d3.annotation().annotations(annotations);
+        const chart = d3.select("svg")
+        chart.transition()
+            .duration(1000);
+        chart.append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations)
+    }
+    const first_data = data.filter(function (d) {
+      return d.state === allGroup[0]
+  });
+  renderThirdChartAnnotations(first_data[first_data.length-1], margin);
 
     // A function that update the chart
     function update(selectedGroup) {
-
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.state==selectedGroup})
-
       // Give these new data to update line
       line
           .datum(dataFilter)
@@ -93,6 +124,7 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv",
             .y(function(d) { return y(+d.cases_avg_per_100k) })
           )
           .attr("stroke", function(d){ return myColor(selectedGroup) })
+      renderThirdChartAnnotations(dataFilter[dataFilter.length-1], margin)
     }
 
     // When the button is changed, run the updateChart function
