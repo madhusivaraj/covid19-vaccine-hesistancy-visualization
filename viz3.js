@@ -13,7 +13,9 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", 
+
+  function(data) {
 
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.state)}).keys()
@@ -33,16 +35,16 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", f
       .range(d3.schemeSet2);
 
     // Add X axis --> it is a date format
-    var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.year; }))
+    var x = d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(7));
+      .call(d3.axisBottom(x));
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.n; })])
+      .domain([0, d3.max(data, function(d) { return +d.cases_avg_per_100k; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
@@ -51,10 +53,10 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", f
     var line = svg
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.name==allGroup[0]}))
+        .datum(data.filter(function(d){return d.state==allGroup[0]}))
         .attr("d", d3.line()
-          .x(function(d) { return x(d.year) })
-          .y(function(d) { return y(+d.n) })
+          .x(function(d) { return x(d3.timeParse("%m/%d/%y")(d.date)) })
+          .y(function(d) { return y(+d.cases_avg_per_100k) })
         )
         .attr("stroke", function(d){ return myColor("valueA") })
         .style("stroke-width", 4)
@@ -64,7 +66,7 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", f
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.name==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.state==selectedGroup})
 
       // Give these new data to update line
       line
@@ -72,8 +74,8 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv", f
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(d.year) })
-            .y(function(d) { return y(+d.n) })
+            .x(function(d) { return x(d.date) })
+            .y(function(d) { return y(+d.cases_avg_per_100k) })
           )
           .attr("stroke", function(d){ return myColor(selectedGroup) })
     }
