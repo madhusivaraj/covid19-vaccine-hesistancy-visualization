@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 1060 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {top: 30, right: 30, bottom: 90, left: 60},
+    width = 1400 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -41,14 +41,27 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/bottom6.csv"
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
+    svg.append("text")
+      .attr("transform",
+          "translate(" + (width/2) + " ," + 
+                         (height + margin.top + 23) + ")")
+    .style("text-anchor", "middle")
+    .text("Timeframe (spanning March 2020 to June 2021)");
 
     // Add Y axis
     var y = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return +d.cases_avg_per_100k; })])
       .range([ height, 0 ]);
     svg.append("g")
-      .call(d3.axisLeft(y));
-
+      .call(d3.axisLeft(y));        
+  svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Average Cases per 100,000 Individuals");   
+      
     // Initialize line with first group of the list
     var line = svg
       .append('g')
