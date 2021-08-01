@@ -48,7 +48,7 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/madhusivaraj/data-visualization/main/Narrative%20Visualization/data/us-states-overall.csv?token=AJ4IWW6SFK3A3UXP4JUPI5DBBDKCK", function(data) {
+d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/us-states-overall.csv", function(data) {
 
     data.sort(function(b, a) {
         return a.PercentageVaccinated - b.PercentageVaccinated;

@@ -48,7 +48,7 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/madhusivaraj/data-visualization/main/Narrative%20Visualization/data/VaccinationData.csv?token=AJ4IWWYCVLWBFZO34EKUX4TBBXDLQ", function(data) {
+d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/VaccinationData.csv", function(data) {
 
     data.sort(function(b, a) {
         return a.EstimatedHesitant - b.EstimatedHesitant;
