@@ -53,7 +53,9 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/bottom6.csv"
       .domain([0, d3.max(data, function(d) { return +d.cases_avg_per_100k; })])
       .range([ height, 0 ]);
     svg.append("g")
-      .call(d3.axisLeft(y));        
+      .call(d3.axisLeft(y));  
+      
+    
   svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)

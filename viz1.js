@@ -102,6 +102,47 @@ svg.selectAll("mybar")
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text("Percentage of Population Hesistant about Vaccines");   
+
+const annotations = [{
+      note: {
+        label: "The states to the left have a high level of concern in regards to vaccine hesitancy. These states are primarily in the South, Midwest, and Rocky Mountain regions, which are more conservative and rural.",
+        title: "Top 10 Vaccine-Hesitant States",
+        wrap: 300,  // try something smaller to see text split in several lines
+        padding: 10   // More = text lower
+      
+     },
+     color: "#606060",
+     x: 364,
+     y: 330,
+     dy: -180,
+     dx: -1,
+     subject: { radius: 150 },
+    //  connector: { end: "arrow" },
+    //  subject: {
+    //   radius: 50,
+    //   radiusPadding: 5
+    // },
+    // type: d3.annotationCalloutCircle
+    },
+    {
+      note: {
+        label: "The states to the right have low or moderate levels of concern in regards to vaccine hesitancy. All of the states, besides Hawaii, are located in the Northeast. It is important to note that the COVID-19 vaccines that have received EUA in the US were developed by Pfizer in New York, Moderna in Massachusetts, and Johnson & Johnson in New Jersey.",
+        title: "Top 10 Vaccine-Receptive States",
+        wrap: 300,  // try something smaller to see text split in several lines
+        padding: 10   // More = text lower
+      
+     },
+     color: "#606060",
+     x: 1206,
+     y: 490,
+     dy: -180,
+     dx: 0,
+    }]
+
+  const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+svg.append("g")
+  .call(makeAnnotations)
     
 
 // Animation

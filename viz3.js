@@ -51,7 +51,10 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv",
       .domain([0, d3.max(data, function(d) { return +d.cases_avg_per_100k; })])
       .range([ height, 0 ]);
     svg.append("g")
-      .call(d3.axisLeft(y));        
+      .call(d3.axisLeft(y));
+      
+      
+      
   svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
@@ -72,6 +75,7 @@ d3.csv("https://raw.githubusercontent.com/madhusivaraj/nv/main/data/top6.csv",
         .attr("stroke", function(d){ return myColor("valueA") })
         .style("stroke-width", 3)
         .style("fill", "none")
+    
 
     // A function that update the chart
     function update(selectedGroup) {

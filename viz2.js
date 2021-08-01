@@ -68,7 +68,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 70])
+  .domain([0, 100])
   .range([ height, 0]);
 svg.append("g")
   .call(d3.axisLeft(y));
@@ -88,7 +88,7 @@ svg.selectAll("mybar")
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
 
-  svg.append("text")             
+    svg.append("text")             
     .attr("transform",
           "translate(" + (width/2) + " ," + 
                          (height + margin.top + 80) + ")")
@@ -102,6 +102,47 @@ svg.selectAll("mybar")
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text("Percentage of Population Vaccinated");   
+
+const annotations = [{
+      note: {
+        label: "All states to the left are located in the Northeast region, where the primary COVID-19 vaccines in the US were developed. Among these 10, we can identify 6 states (CT, MA, NJ, NY, RI, VT) that were also among the top 10 vaccine-receptive states in Scene 1.",
+        title: "Top 10 States with Highest Vaccinated Populations (>51%)",
+        wrap: 280,  // try something smaller to see text split in several lines
+        padding: 10   // More = text lower
+      
+     },
+     color: "#606060",
+     x: 305,
+     y: 370,
+     dy: -180,
+     dx: -1,
+     subject: { radius: 150 },
+    //  connector: { end: "arrow" },
+    //  subject: {
+    //   radius: 50,
+    //   radiusPadding: 5
+    // },
+    // type: d3.annotationCalloutCircle
+    },
+    {
+      note: {
+        label: "The states to the right, besides Hawaii, are located in the South and Mountain regions. When compared to the top 10 vaccine-hesitant states identified in Scene 1, six common states are Alabama, Arkansas, Idaho, Louisiana, Mississippi, and Wyoming.",
+        title: "Top 10 States with Lowest Vaccinated Populations (<36%)",
+        wrap: 270,  // try something smaller to see text split in several lines
+        padding: 10   // More = text lower
+      
+     },
+     color: "#606060",
+     x: 1206,
+     y: 470,
+     dy: -180,
+     dx: 0,
+    }]
+
+  const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+svg.append("g")
+  .call(makeAnnotations)
     
 
 // Animation
