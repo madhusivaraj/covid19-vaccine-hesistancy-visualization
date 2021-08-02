@@ -101,7 +101,7 @@ svg.selectAll("mybar")
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Percentage of Population Hesistant about Vaccines");   
+      .text("Percentage of Population Hesitant about Vaccines");   
 
 const annotations = [{
       note: {
